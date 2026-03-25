@@ -8,42 +8,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="bgBlur" class="bg-blur"></div>
     <div class="bg-overlay"></div>
-
     <div class="container">
         <header>
             <h1 id="logo">🎬 NE İZLESEK<span>?</span></h1>
             <p>Kararsız mı kaldın? Senin için en iyi filmi bulalım.</p>
         </header>
-
         <main>
             <div class="controls">
                 <div class="search-box">
                     <input type="text" id="searchInput" placeholder="Film adı ara...">
                 </div>
                 <div class="filter-box">
-                <select id="genreSelect">
-                    <option value="">Tüm Türler</option>
-                    <option value="28">Aksiyon</option>
-                    <option value="35">Komedi</option>
-                    <option value="18">Dram</option>
-                    <option value="27">Korku</option>
-                    <option value="878">Bilim Kurgu</option>
-                    <option value="10749">Romantik</option>
-                    <option value="16">Animasyon</option>
-                </select>
-                <button id="suggestBtn">ŞANSIMI DENE</button>
-            </div>
-
-            <div id="loader" class="loader"></div>
-
-            <div id="movieGrid" class="movie-grid">
+                    <select id="genreSelect">
+                        <option value="">Tüm Türler</option>
+                        <option value="28">Aksiyon</option>
+                        <option value="35">Komedi</option>
+                        <option value="18">Dram</option>
+                        <option value="27">Korku</option>
+                        <option value="878">Bilim Kurgu</option>
+                        <option value="10749">Romantik</option>
+                        <option value="16">Animasyon</option>
+                    </select>
                 </div>
+                <button id="suggestBtn">KEŞFET</button>
+            </div>
+            <div id="loader" class="loader"></div>
+            <div id="movieGrid" class="movie-grid"></div>
         </main>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>

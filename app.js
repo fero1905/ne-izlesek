@@ -1,4 +1,4 @@
-const API_KEY = 'fe1c36f2f60ad7048e1a20128a189ea5'; // <-- Buraya kendi key'ini yapıştır
+const API_KEY = 'fe1c36f2f60ad7048e1a20128a189ea5'; 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_URL = 'https://image.tmdb.org/t/p/w1280';
@@ -7,8 +7,7 @@ const suggestBtn = document.getElementById('suggestBtn');
 const movieGrid = document.getElementById('movieGrid');
 const loader = document.getElementById('loader');
 const bgBlur = document.getElementById('bgBlur');
-
-// app.js dosyandaki suggestBtn olayını bu mantıkla güncelle:
+const logo = document.getElementById('logo');
 
 suggestBtn.addEventListener('click', async () => {
     const searchInput = document.getElementById('searchInput').value;
@@ -18,8 +17,6 @@ suggestBtn.addEventListener('click', async () => {
     movieGrid.innerHTML = '';
 
     let url = "";
-
-    // MANTIK: Eğer arama kutusu doluysa arama yap, boşsa türe göre getir
     if (searchInput.trim() !== "") {
         url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(searchInput)}&language=tr-TR`;
     } else {
@@ -32,9 +29,7 @@ suggestBtn.addEventListener('click', async () => {
         const data = await response.json();
         
         if (data.results && data.results.length > 0) {
-            // Arama sonuçlarında 12, keşfette 12 film gösterelim
             const movies = data.results.slice(0, 12).filter(m => m.poster_path);
-
             setTimeout(() => {
                 displayMovies(movies);
                 loader.style.display = 'none';
@@ -45,14 +40,7 @@ suggestBtn.addEventListener('click', async () => {
         }
     } catch (error) {
         loader.style.display = 'none';
-        console.error("Hata:", error);
-    }
-});
-
-// Arama kutusunda 'Enter'a basınca da çalışsın
-document.getElementById('searchInput').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        suggestBtn.click();
+        console.error(error);
     }
 });
 
@@ -60,46 +48,30 @@ function displayMovies(movies) {
     movies.forEach(movie => {
         const movieItem = document.createElement('div');
         movieItem.classList.add('movie-item');
-        
         movieItem.innerHTML = `
             <img src="${IMAGE_URL + movie.poster_path}" alt="${movie.title}">
             <div class="movie-item-info">
                 <h3>${movie.title}</h3>
-                <div class="meta">
-                    <span class="rating">⭐ ${movie.vote_average.toFixed(1)}</span>
-                    <span class="year">${movie.release_date ? movie.release_date.split('-')[0] : ""}</span>
-                </div>
+                <p>⭐ ${movie.vote_average.toFixed(1)} | ${movie.release_date ? movie.release_date.split('-')[0] : ""}</p>
             </div>
         `;
-
         movieItem.onclick = () => {
             if (movie.backdrop_path && bgBlur) {
                 bgBlur.style.backgroundImage = `url(${BACKDROP_URL + movie.backdrop_path})`;
             }
         };
-
         movieGrid.appendChild(movieItem);
     });
 }
-// app.js dosyanın en altına bu kodu ekle:
-
-const logo = document.getElementById('logo');
 
 logo.addEventListener('click', () => {
-    // 1. Arama kutusunu ve seçimi temizle
     document.getElementById('searchInput').value = '';
     document.getElementById('genreSelect').value = '';
-    
-    // 2. Film listesini temizle
     movieGrid.innerHTML = '';
-    
-    // 3. Arka planı varsayılan siyah haline döndür
-    if (bgBlur) {
-        bgBlur.style.backgroundImage = 'none';
-    }
-    
-    // 4. Sayfayı en yukarı kaydır (eğer aşağı indiysen)
+    if (bgBlur) bgBlur.style.backgroundImage = 'none';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    
-    console.log("Sayfa sıfırlandı, ana sayfaya dönüldü.");
+});
+
+document.getElementById('searchInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') suggestBtn.click();
 });
