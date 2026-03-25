@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ne İzlesek? | Film Rehberi</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
@@ -17,21 +17,15 @@
         </header>
         <main>
             <div class="controls">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Film adı ara...">
-                </div>
-                <div class="filter-box">
-                    <select id="genreSelect">
-                        <option value="">Tüm Türler</option>
-                        <option value="28">Aksiyon</option>
-                        <option value="35">Komedi</option>
-                        <option value="18">Dram</option>
-                        <option value="27">Korku</option>
-                        <option value="878">Bilim Kurgu</option>
-                        <option value="10749">Romantik</option>
-                        <option value="16">Animasyon</option>
-                    </select>
-                </div>
+                <input type="text" id="searchInput" placeholder="Film adı...">
+                <select id="genreSelect">
+                    <option value="">Tüm Türler</option>
+                    <option value="28">Aksiyon</option>
+                    <option value="35">Komedi</option>
+                    <option value="18">Dram</option>
+                    <option value="27">Korku</option>
+                    <option value="878">Bilim Kurgu</option>
+                </select>
                 <button id="suggestBtn">KEŞFET</button>
             </div>
             <div id="loader" class="loader"></div>
